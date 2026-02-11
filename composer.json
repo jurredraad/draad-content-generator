@@ -1,0 +1,14 @@
+{
+    "name": "draad/content-generator",
+    "description": "WordPress plugin voor AI content generatie met ACF integratie",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Draad\\ContentGenerator\\": "src/"
+        }
+    }
+}
