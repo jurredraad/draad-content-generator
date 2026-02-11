@@ -1,0 +1,17 @@
+#dcg-generator-form .form-table th {
+    width: 200px;
+}
+
+#dcg-generator-form .spinner {
+    float: none;
+    margin-top: 0;
+    vertical-align: middle;
+}
+
+#dcg-result {
+    margin-top: 15px;
+}
+
+#dcg-generate-btn {
+    margin-right: 10px;
+}
