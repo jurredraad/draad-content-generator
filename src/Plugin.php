@@ -54,9 +54,13 @@ class Plugin
             true
         );
 
-        wp_localize_script( 'dcg-admin', 'dcgAdmin', [
-            'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-            'nonce'   => wp_create_nonce( 'dcg_generate' ),
-        ] );
+        wp_localize_script(
+            'dcg-admin',
+            'dcgAdmin',
+            [
+                'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+                'nonce'   => wp_create_nonce( 'dcg_generate' ),
+            ]
+        );
     }
 }

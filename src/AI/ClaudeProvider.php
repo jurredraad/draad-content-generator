@@ -17,24 +17,29 @@ class ClaudeProvider implements ProviderInterface
             throw new \RuntimeException( 'Claude API key is niet ingesteld.' );
         }
 
-        $response = wp_remote_post( 'https://api.anthropic.com/v1/messages', [
-            'timeout' => 120,
-            'headers' => [
-                'Content-Type'      => 'application/json',
-                'x-api-key'         => $this->apiKey,
-                'anthropic-version' => '2023-06-01',
-            ],
-            'body' => wp_json_encode( [
-                'model'      => 'claude-sonnet-4-5-20250929',
-                'max_tokens' => 4096,
-                'messages'   => [
+        $response = wp_remote_post(
+            'https://api.anthropic.com/v1/messages',
+            [
+				'timeout' => 120,
+				'headers' => [
+					'Content-Type'      => 'application/json',
+					'x-api-key'         => $this->apiKey,
+					'anthropic-version' => '2023-06-01',
+				],
+				'body'    => wp_json_encode(
                     [
-                        'role'    => 'user',
-                        'content' => $prompt,
-                    ],
-                ],
-            ] ),
-        ] );
+						'model'      => 'claude-sonnet-4-5-20250929',
+						'max_tokens' => 4096,
+						'messages'   => [
+							[
+								'role'    => 'user',
+								'content' => $prompt,
+							],
+						],
+					]
+                ),
+			]
+        );
 
         if ( is_wp_error( $response ) ) {
             throw new \RuntimeException( 'Claude API fout: ' . $response->get_error_message() );

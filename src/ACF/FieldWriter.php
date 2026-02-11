@@ -47,7 +47,7 @@ class FieldWriter
                 continue;
             }
 
-            $layoutName = $layout['acf_fc_layout'];
+            $layoutName      = $layout['acf_fc_layout'];
             $formattedLayout = [ 'acf_fc_layout' => $layoutName ];
 
             // Haal sub_fields schema op voor deze layout

@@ -17,22 +17,27 @@ class OpenAIProvider implements ProviderInterface
             throw new \RuntimeException( 'OpenAI API key is niet ingesteld.' );
         }
 
-        $response = wp_remote_post( 'https://api.openai.com/v1/chat/completions', [
-            'timeout' => 120,
-            'headers' => [
-                'Content-Type'  => 'application/json',
-                'Authorization' => 'Bearer ' . $this->apiKey,
-            ],
-            'body' => wp_json_encode( [
-                'model'    => 'gpt-4o',
-                'messages' => [
+        $response = wp_remote_post(
+            'https://api.openai.com/v1/chat/completions',
+            [
+				'timeout' => 120,
+				'headers' => [
+					'Content-Type'  => 'application/json',
+					'Authorization' => 'Bearer ' . $this->apiKey,
+				],
+				'body'    => wp_json_encode(
                     [
-                        'role'    => 'user',
-                        'content' => $prompt,
-                    ],
-                ],
-            ] ),
-        ] );
+						'model'    => 'gpt-4o',
+						'messages' => [
+							[
+								'role'    => 'user',
+								'content' => $prompt,
+							],
+						],
+					]
+                ),
+			]
+        );
 
         if ( is_wp_error( $response ) ) {
             throw new \RuntimeException( 'OpenAI API fout: ' . $response->get_error_message() );

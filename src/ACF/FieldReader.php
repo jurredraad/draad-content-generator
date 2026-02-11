@@ -11,14 +11,19 @@ class FieldReader
      */
     public function getFieldGroupsForPostType( string $postType ): array
     {
-        $groups = acf_get_field_groups( [
-            'post_type' => $postType,
-        ] );
+        $groups = acf_get_field_groups(
+            [
+				'post_type' => $postType,
+			]
+        );
 
-        return array_map( fn( array $group ) => [
-            'key'   => $group['key'],
-            'title' => $group['title'],
-        ], $groups );
+        return array_map(
+            fn( array $group ) => [
+				'key'   => $group['key'],
+				'title' => $group['title'],
+            ],
+            $groups
+        );
     }
 
     /**
@@ -53,8 +58,8 @@ class FieldReader
     private function parseField( array $field ): array
     {
         $parsed = [
-            'key'  => $field['key'],
-            'type' => $field['type'],
+            'key'   => $field['key'],
+            'type'  => $field['type'],
             'label' => $field['label'],
         ];
 
@@ -69,8 +74,8 @@ class FieldReader
 
             foreach ( $field['layouts'] as $layout ) {
                 $layoutSchema = [
-                    'name'  => $layout['name'],
-                    'label' => $layout['label'],
+                    'name'       => $layout['name'],
+                    'label'      => $layout['label'],
                     'sub_fields' => [],
                 ];
 

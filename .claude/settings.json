@@ -1,0 +1,19 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "filepath=\"$CLAUDE_FILE_PATH\"; if [ -n \"$filepath\" ] && echo \"$filepath\" | grep -q '\\.php$'; then php -l \"$filepath\" 2>&1; fi"
+          },
+          {
+            "type": "command",
+            "command": "filepath=\"$CLAUDE_FILE_PATH\"; if [ -n \"$filepath\" ] && echo \"$filepath\" | grep -q '\\.php$'; then ./vendor/bin/phpcs --standard=phpcs.xml \"$filepath\" 2>&1 || true; fi"
+          }
+        ]
+      }
+    ]
+  }
+}

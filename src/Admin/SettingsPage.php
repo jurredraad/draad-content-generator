@@ -5,7 +5,7 @@ namespace Draad\ContentGenerator\Admin;
 class SettingsPage
 {
     private const OPTION_GROUP = 'dcg_settings';
-    private const PAGE_SLUG = 'dcg-settings';
+    private const PAGE_SLUG    = 'dcg-settings';
 
     public function register(): void
     {
@@ -85,7 +85,7 @@ class SettingsPage
     public function renderApiKeyField( array $args ): void
     {
         $option = $args['option'];
-        $value = get_option( $option, '' );
+        $value  = get_option( $option, '' );
         ?>
         <input
             type="password"

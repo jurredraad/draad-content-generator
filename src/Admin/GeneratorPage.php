@@ -38,7 +38,7 @@ class GeneratorPage
         }
 
         $fieldReader = new FieldReader();
-        $groups = $fieldReader->getFieldGroupsForPostType( $postType );
+        $groups      = $fieldReader->getFieldGroupsForPostType( $postType );
 
         wp_send_json_success( $groups );
     }
@@ -54,11 +54,11 @@ class GeneratorPage
             wp_send_json_error( 'Onvoldoende rechten.' );
         }
 
-        $postType   = sanitize_text_field( $_POST['post_type'] ?? '' );
-        $title      = sanitize_text_field( $_POST['title'] ?? '' );
-        $prompt     = sanitize_textarea_field( $_POST['prompt'] ?? '' );
-        $provider   = sanitize_text_field( $_POST['provider'] ?? '' );
-        $groupKeys  = array_map( 'sanitize_text_field', $_POST['field_groups'] ?? [] );
+        $postType  = sanitize_text_field( $_POST['post_type'] ?? '' );
+        $title     = sanitize_text_field( $_POST['title'] ?? '' );
+        $prompt    = sanitize_textarea_field( $_POST['prompt'] ?? '' );
+        $provider  = sanitize_text_field( $_POST['provider'] ?? '' );
+        $groupKeys = array_map( 'sanitize_text_field', $_POST['field_groups'] ?? [] );
 
         if ( empty( $postType ) || empty( $prompt ) || empty( $groupKeys ) ) {
             wp_send_json_error( 'Vul alle verplichte velden in.' );
@@ -66,12 +66,14 @@ class GeneratorPage
 
         try {
             $generator = new \Draad\ContentGenerator\Generator\ContentGenerator();
-            $postId = $generator->generate( $postType, $title, $prompt, $provider, $groupKeys );
+            $postId    = $generator->generate( $postType, $title, $prompt, $provider, $groupKeys );
 
-            wp_send_json_success( [
-                'post_id'  => $postId,
-                'edit_url' => get_edit_post_link( $postId, 'raw' ),
-            ] );
+            wp_send_json_success(
+                [
+					'post_id'  => $postId,
+					'edit_url' => get_edit_post_link( $postId, 'raw' ),
+				]
+            );
         } catch ( \Throwable $e ) {
             wp_send_json_error( $e->getMessage() );
         }
@@ -79,7 +81,7 @@ class GeneratorPage
 
     public function renderPage(): void
     {
-        $postTypes = get_post_types( [ 'public' => true ], 'objects' );
+        $postTypes       = get_post_types( [ 'public' => true ], 'objects' );
         $defaultProvider = get_option( 'dcg_default_provider', 'claude' );
         ?>
         <div class="wrap">

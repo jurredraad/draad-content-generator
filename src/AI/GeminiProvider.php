@@ -19,21 +19,26 @@ class GeminiProvider implements ProviderInterface
 
         $url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' . $this->apiKey;
 
-        $response = wp_remote_post( $url, [
-            'timeout' => 120,
-            'headers' => [
-                'Content-Type' => 'application/json',
-            ],
-            'body' => wp_json_encode( [
-                'contents' => [
+        $response = wp_remote_post(
+            $url,
+            [
+				'timeout' => 120,
+				'headers' => [
+					'Content-Type' => 'application/json',
+				],
+				'body'    => wp_json_encode(
                     [
-                        'parts' => [
-                            [ 'text' => $prompt ],
-                        ],
-                    ],
-                ],
-            ] ),
-        ] );
+						'contents' => [
+							[
+								'parts' => [
+									[ 'text' => $prompt ],
+								],
+							],
+						],
+					]
+                ),
+			]
+        );
 
         if ( is_wp_error( $response ) ) {
             throw new \RuntimeException( 'Gemini API fout: ' . $response->get_error_message() );

@@ -49,17 +49,20 @@ class ContentGenerator
 
         // 3. Stuur naar AI provider
         $aiProvider = $this->resolveProvider( $provider );
-        $response = $aiProvider->generate( $aiPrompt );
+        $response   = $aiProvider->generate( $aiPrompt );
 
         // 4. Parse JSON response
         $data = $this->parseResponse( $response );
 
         // 5. Maak post aan
-        $postId = wp_insert_post( [
-            'post_type'   => $postType,
-            'post_title'  => ! empty( $title ) ? $title : ( $data['_post_title'] ?? 'Gegenereerde post' ),
-            'post_status' => 'draft',
-        ], true );
+        $postId = wp_insert_post(
+            [
+				'post_type'   => $postType,
+				'post_title'  => ! empty( $title ) ? $title : ( $data['_post_title'] ?? 'Gegenereerde post' ),
+				'post_status' => 'draft',
+			],
+			true
+        );
 
         if ( is_wp_error( $postId ) ) {
             throw new \RuntimeException( 'Post aanmaken mislukt: ' . $postId->get_error_message() );

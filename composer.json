@@ -10,5 +10,15 @@
         "psr-4": {
             "Draad\\ContentGenerator\\": "src/"
         }
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "*",
+        "wp-coding-standards/wpcs": "*",
+        "dealerdirect/phpcodesniffer-composer-installer": "*"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }

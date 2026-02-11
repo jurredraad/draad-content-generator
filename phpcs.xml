@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<ruleset name="Draad Content Generator">
+    <description>WordPress coding standards voor Draad Content Generator</description>
+
+    <rule ref="WordPress-Extra">
+        <!-- PSR-4 autoloading: bestandsnamen niet afdwingen -->
+        <exclude name="WordPress.Files.FileName"/>
+
+        <!-- Allman brace style toestaan -->
+        <exclude name="Generic.Classes.OpeningBraceSameLine"/>
+        <exclude name="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
+        <exclude name="WordPress.WhiteSpace.ControlStructureSpacing.ExtraSpaceAfterCloseParenthesis"/>
+
+        <!-- Spaces ipv tabs toestaan -->
+        <exclude name="Generic.WhiteSpace.DisallowSpaceIndent"/>
+
+        <!-- Short array syntax [] toestaan -->
+        <exclude name="Universal.Arrays.DisallowShortArraySyntax"/>
+
+        <!-- camelCase toestaan voor variabelen en methodes -->
+        <exclude name="WordPress.NamingConventions.ValidVariableName"/>
+        <exclude name="WordPress.NamingConventions.ValidFunctionName"/>
+
+        <!-- Yoda conditions niet afdwingen -->
+        <exclude name="WordPress.PHP.YodaConditions"/>
+
+        <!-- Exceptions hoeven niet geëscaped te worden -->
+        <exclude name="WordPress.Security.EscapeOutput.ExceptionNotEscaped"/>
+    </rule>
+
+    <!-- Spacing binnen haakjes en blokhaken -->
+    <rule ref="WordPress.WhiteSpace">
+        <exclude name="WordPress.WhiteSpace.ControlStructureSpacing.ExtraSpaceAfterCloseParenthesis"/>
+    </rule>
+
+    <file>./src/</file>
+    <file>./draad-content-generator.php</file>
+
+    <exclude-pattern>./vendor/*</exclude-pattern>
+
+    <arg name="extensions" value="php"/>
+    <arg value="sp"/>
+    <arg name="colors"/>
+</ruleset>
